@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>  
+        /* Background styling with subtle animation */
+        body {
+            background: url('food-prev.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: fadeIn 2s ease-in-out, backgroundAnimation 20s infinite alternate;
+            overflow: hidden;
+        }
+
+        /* Fade-in animation for initial appearance */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Subtle movement for the background image */
+        @keyframes backgroundAnimation {
+            0% { background-position: center center; }
+            100% { background-position: top right; }
+        }
+
+        /* Glassmorphism styling for the container */
+        #container {
+            width: 45%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 450px;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+/* Border animation with glowing effect */
+        @keyframes borderGlow {
+            0% { box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(0, 123, 255, 0.8); }
+            100% { box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
+        }
+
+ /* Success message styling */
+        .success-message {
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+}
+
+        /* Home button styling */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color:  #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for Home button */
+        .home-button:hover {
+            background-color: #555;
+        }
+
+        /* Heading styling */
+        #container h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        /* Label styling */
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Input styling */
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Input focus effect */
+        .form-group input:focus, .form-group select:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Button styling */
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Radio buttons styling */
+        .form-group .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        /* Optional container and text alignment for dynamic fields */
+        #form-fields {
+            margin-top: 20px;
+        }
+    </style>
+   <script>
+        function updateForm() {
+            const type = document.querySelector('input[name="type"]:checked').value;
+            let fields = '';
+
+            if (type === 'Restaurant') {
+                fields = ` 
+                    <div class="form-group">
+                        <label for="Restaurant_Name">Restaurant Name:</label>
+                        <input type="text" id="Restaurant_Name" name="Restaurant_Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Location">Location:</label>
+                        <input type="text" id="Location" name="Location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Mobile_Number">Contact Number:</label>
+                        <input type="text" id="Mobile_Number" name="Mobile_Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Opening_Hours">Opening Hours:</label>
+                        <input type="text" id="Opening_Hours" name="Opening_Hours" required>
+                    </div>
+                `;
+            } else if (type === 'Function_Hall') {
+                fields = `
+                    <div class="form-group">
+                        <label for="Function_Hall_Name">Function Hall Name:</label>
+                        <input type="text" id="Function_Hall_Name" name="Function_Hall_Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Location">Location:</label>
+                        <input type="text" id="Location" name="Location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Mobile_Number">Contact Number:</label>
+                        <input type="text" id="Mobile_Number" name="Mobile_Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Seating_Capacity">Seating Capacity:</label>
+                        <input type="text" id="Seating_Capacity" name="Seating_Capacity" required>
+                    </div>
+                `;
+            } else if (type === 'Orphan_Home') {
+                fields = `
+                    <div class="form-group">
+                        <label for="Orphan_Home_Name">Orphan Home Name:</label>
+                        <input type="text" id="Orphan_Home_Name" name="Orphan_Home_Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Location">Location:</label>
+                        <input type="text" id="Location" name="Location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Mobile_Number">Contact Number:</label>
+                        <input type="text" id="Mobile_Number" name="Mobile_Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Number_of_Children">Number of Children:</label>
+                        <input type="text" id="Number_of_Children" name="Number_of_Children" required>
+                    </div>
+                `;
+            }
+
+            document.getElementById('form-fields').innerHTML = fields;
+        }
+
+        // AJAX function to submit form data
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(document.forms['f1']);
+            fetch('Registration.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector('.success-message').style.display = 'block';
+                document.querySelector('.success-message').innerText = 'Data inserted successfully!';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <!-- Home button to navigate back to the homepage -->
+    <a href="main.html" class="home-button">Home</a>
+
+    <div id="container">
+        <h1>Registration Form</h1>
+        <div class="success-message">Data inserted successfully!</div>
+        
+        <form name="f1" method="post" action="Registration.php">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>Select Type:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="type" value="Restaurant" onchange="updateForm()"> Restaurant</label>
+                    <label><input type="radio" name="type" value="Function_Hall" onchange="updateForm()"> Function Hall</label>
+                    <label><input type="radio" name="type" value="Orphan_Home" onchange="updateForm()"> Orphan Home</label>
+                </div>
+            </div>
+            <div id="form-fields">
+                <!-- Dynamic fields based on type selection -->
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Donation Form</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('hero.jpg'); /* Replace with your actual image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: backgroundZoom 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundZoom {
+            0% { background-size: 100%; }
+            100% { background-size: 110%; }
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons a:hover { background-color: #555; }
+
+        .container {
+            width: 50%;
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-sizing: border-box;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group label {
+            width: 150px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        .form-group .radio-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group .radio-group label {
+            margin-right: 20px;
+            font-weight: normal;
+            color: #333;
+        }
+
+        .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Thank You Message Styling */
+        .thank-you-message {
+            display: none;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="main.html">Home</a>
+        <a href="LoginR.html">Login</a>
+        <a href="Registration.html">Register</a>
+    </div>
+
+    <div class="container">
+        <h1>Food Donation Form</h1>
+        <form id="donationForm" method="post" acton="">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="Type" value="Restaurant" required> Restaurant</label>
+                    <label><input type="radio" name="Type" value="Function_Hall" required> Function Hall</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="loc" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="text" id="contact" name="M_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Type of Food:</label>
+                <input type="text" id="quantity" name="T_food" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+        <!-- Thank You Message -->
+        <div class="thank-you-message" id="thankYouMessage">
+            Thank you for your donation!
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("donationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents the default form submission
+
+            const formData = new FormData(this);
+
+            // Sends data to the backend
+            fetch("Create.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Hides the form and shows a thank you message
+                document.getElementById("donationForm").style.display = "none";
+                document.getElementById("thankYouMessage").style.display = "block";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("There was an error submitting your form. Please try again.");
+            });
+        });
+    </script>
+
+</body>
+</html>

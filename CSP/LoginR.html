@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('login999.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            animation: backgroundZoom 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundZoom {
+            0% {
+                background-size: 100%;
+            }
+            100% {
+                background-size: 110%;
+            }
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #555;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-box {
+            width: 45%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            /* Animation */
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 1s ease forwards;
+        }
+
+        .form-box:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .form-box:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .form-box td {
+            padding: 5px;
+        }
+
+        .form-box input[type="text"],
+        .form-box input[type="password"],
+        .form-box input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin: 3px 0;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-box input[type="submit"] {
+            cursor: pointer;
+        }
+
+        .form-box-1 input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .form-box-1 input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-box-2 input[type="submit"] {
+            background-color: #ff8000;
+            color: #fff;
+        }
+
+        .form-box-2 input[type="submit"]:hover {
+            background-color: #cc6600;
+        }
+
+        .form-box label {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .form-box input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="main.html">Home</a>
+        <a href="Registration.html">Registration</a>
+    </div>
+
+    <div class="container">
+        <div class="form-box form-box-1">
+            <div class="heading">Donor Login</div>
+            <form name="f2" action="store.php" method="post">
+                <table>
+                    <tr>
+                        <td><label for="UName">UserName:</label></td>
+                        <td><input type="text" id="UName" name="UName" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="Pass">Password:</label></td>
+                        <td><input type="password" id="Pass" name="Pass" required></td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <label><input type="radio" name="Type" value="Restaurant" required>Restaurant</label>
+                            <label><input type="radio" name="Type" value="Function_Hall" required>Function Hall</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Login"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="form-box form-box-2">
+            <div class="heading">Acceptor Login</div>
+            <form name="f3" action="adminlogin.php" method="post">
+                <table>
+                    <tr>
+                        <td><label for="AUName">UserName:</label></td>
+                        <td><input type="text" id="AUName" name="UName" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="APass">Password:</label></td>
+                        <td><input type="password" id="APass" name="Pass" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="OName">HomeName:</label></td>
+                        <td><input type="text" id="OName" name="OName" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Login"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
